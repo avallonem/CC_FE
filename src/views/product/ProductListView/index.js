@@ -25,6 +25,8 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import configData from 'src/config.json';
+import keycloak from 'src/';
 
 
 
@@ -85,7 +87,7 @@ const ProductListView = ({ className, ...rest }) => {
   // similar to componentDidMount()
   useEffect(() => {
     
-    fetch('http://localhost:9000/api/customers?family_name=Borgia')
+    fetch(configData.BACKEND_URL + '/api/customers?family_name=' + keycloak.idTokenParsed.family_name)
       .then(res => res.json())
       .then(
         (result) => {

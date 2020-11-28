@@ -15,7 +15,7 @@ import {
 } from '@material-ui/core';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import MoneyIcon from '@material-ui/icons/Money';
-
+import configData from 'src/config.json';
 
 
 /*
@@ -60,8 +60,9 @@ const Budget = ({ className, ...rest }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const Web3 = require("web3")
   useEffect(() => {
-  const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"))
-  web3.eth.getBalance("0x3Cad7A778818cd988f6546E32A6e7Dbf8e5c6AeB", function(err, result) {
+  const web3 = new Web3(new Web3.providers.HttpProvider(configData.BLOCKCHAIN_URL))
+  const account= web3.eth.getAccounts[0];
+  web3.eth.getBalance(configData.WALLET_ADDRESS, function(err, result) {
     if (err) {
       console.log(err)
     } else {

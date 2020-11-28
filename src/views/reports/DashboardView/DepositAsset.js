@@ -20,6 +20,9 @@ import {
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import FormDialog from './FormDialog';
+import configData from 'src/config.json';
+import keycloak from 'src/';
+
 const data = [
   {
     id: uuid(),
@@ -74,7 +77,7 @@ const DepositAsset = ({ className, ...rest }) => {
   // similar to componentDidMount()
   useEffect(() => {
     
-    fetch('http://localhost:9000/api/customers?family_name=Borgia')
+    fetch(configData.BACKEND_URL + '/api/customers?family_name=' + keycloak.idTokenParsed.family_name)
       .then(res => res.json())
       .then(
         (result) => {

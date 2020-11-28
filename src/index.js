@@ -5,6 +5,7 @@ import * as serviceWorker from './serviceWorker';
 import App from './App';
 import UserInfo from './UserInfo';
 import Keycloak from 'keycloak-js';
+import configData from './config.json';
 
 let keycloak = Keycloak('/keycloak.json');
  

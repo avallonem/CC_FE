@@ -24,9 +24,10 @@ import Web3 from 'web3';
 import { pensionNotarization } from './abis.js';
 import keycloak from 'src/';
 import AlertDialog from './AlertDialog';
+import configData from 'src/config.json';
 
 const web3 = new Web3(Web3.givenProvider);
-const contractAddr = '0x8FB9bdAc34d72941C672360f50e20e7CDf2e0a6f';
+const contractAddr = configData.NOTARIZATION_CONTRACT;
 const MyContract = new web3.eth.Contract(pensionNotarization, contractAddr);
 
 
@@ -49,7 +50,7 @@ const ClaimForm = ({ className, ...rest }) => {
   let navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:9000/api/customers?family_name=Borgia')
+    fetch(configData.BACKEND_URL + '/api/customers?family_name=' + keycloak.idTokenParsed.family_name)
           .then(res => res.json())
           .then(
             (result) => {         

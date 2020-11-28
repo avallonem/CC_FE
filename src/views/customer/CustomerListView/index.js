@@ -27,7 +27,7 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
+import configData from 'src/config.json';
 
 const styles = theme => ({
   root: {
@@ -87,7 +87,7 @@ const CustomerListView = ({ className, ...rest }) => {
   // this useEffect will run once
   // similar to componentDidMount()
   useEffect(() => {
-    fetch("http://localhost:9000/api/assets")
+    fetch(configData.BACKEND_URL + "/api/assets")
       .then(res => res.json())
       .then(
         (result) => {
