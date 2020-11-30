@@ -82,13 +82,19 @@ const ClaimForm = ({ className, ...rest }) => {
     body: JSON.stringify({ 
     'given_name':keycloak.idTokenParsed.given_name,
     'family_name':keycloak.idTokenParsed.family_name,
+    'fiscal_number':keycloak.idTokenParsed.fiscal_number,
+    'place_of_birth': keycloak.idTokenParsed.place_of_birth,
+    'date_of_birth': keycloak.idTokenParsed.date_of_birth,
+    'country_of_birth': keycloak.idTokenParsed.country_of_birth,
+    'mobile_phone': keycloak.idTokenParsed.mobile_phone,
+    'gender': keycloak.idTokenParsed.gender,
     'asset_title': sessionStorage.getItem('asset_title'),
     'asset_description': sessionStorage.getItem('asset_description') 
   })
 };
   if (products.length<1){
     
-    fetch('http://localhost:9000/api/customers',requestOptions).then(res => res.json())
+    fetch(configData.BACKEND_URL + '/api/customers',requestOptions).then(res => res.json())
 
   const accounts = await window.ethereum.enable();
   const account = accounts[0];
@@ -122,7 +128,7 @@ const ClaimForm = ({ className, ...rest }) => {
             label="Name"
             margin="normal"
             name="Name"
-			defaultValue={sessionStorage.getItem('given_name')}
+			      defaultValue={keycloak.idTokenParsed.given_name}
             onChange={handleChange}
             variant="outlined"
           />
@@ -131,7 +137,16 @@ const ClaimForm = ({ className, ...rest }) => {
             label="Surname"
             margin="normal"
             name="confirm"
-			defaultValue={sessionStorage.getItem('family_name')}
+			      defaultValue={keycloak.idTokenParsed.family_name}
+            onChange={handleChange}
+            variant="outlined"
+          />
+          <TextField
+            fullWidth
+            label="Gender"
+            margin="normal"
+            name="Gender"
+            defaultValue={keycloak.idTokenParsed.gender}
             onChange={handleChange}
             variant="outlined"
           />
@@ -140,6 +155,7 @@ const ClaimForm = ({ className, ...rest }) => {
             label="Social Security Number/Fiscal Number"
             margin="normal"
             name="Social Security Number/Fiscal Number"
+            defaultValue={keycloak.idTokenParsed.fiscal_number}
             onChange={handleChange}
             variant="outlined"
           />
@@ -148,6 +164,7 @@ const ClaimForm = ({ className, ...rest }) => {
             label="Date of Birth"
             margin="normal"
             name="Date of Birth"
+            defaultValue={keycloak.idTokenParsed.date_of_birth}
             onChange={handleChange}
             variant="outlined"
           />
@@ -156,6 +173,7 @@ const ClaimForm = ({ className, ...rest }) => {
             label="Country of Birth"
             margin="normal"
             name="Country of Birth"
+            defaultValue={keycloak.idTokenParsed.country_of_birth}
             onChange={handleChange}
             variant="outlined"
           />
@@ -164,6 +182,7 @@ const ClaimForm = ({ className, ...rest }) => {
             label="City of Birth"
             margin="normal"
             name="City of Birth"
+            defaultValue={keycloak.idTokenParsed.place_of_birth}
             onChange={handleChange}
             variant="outlined"
           />
@@ -172,6 +191,7 @@ const ClaimForm = ({ className, ...rest }) => {
             label="email address"
             margin="normal"
             name="email address"
+            defaultValue={keycloak.idTokenParsed.email}
             onChange={handleChange}
             variant="outlined"
           />
@@ -180,17 +200,11 @@ const ClaimForm = ({ className, ...rest }) => {
             label="Phone Number"
             margin="normal"
             name="Phone Number"
+            defaultValue={keycloak.idTokenParsed.mobile_phone}
             onChange={handleChange}
             variant="outlined"
           />
-		   <TextField
-            fullWidth
-            label="Monthly Amount to be charged on the Pension Fund (in Ether)"
-            margin="normal"
-            name="amount"
-            onChange={handleChange}
-            variant="outlined"
-          />
+		   
         </CardContent>
         <Divider />
 		<CardContent>

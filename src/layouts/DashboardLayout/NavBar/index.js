@@ -39,7 +39,7 @@ function getRole ()  {
   }
 
 function items (){
-   if(sessionStorage.getItem('role')=='Customer'){ return [
+   if(keycloak.hasRealmRole('Customer')){ return [
   {
     href: '/app/dashboard',
     icon: BarChartIcon,
@@ -58,7 +58,7 @@ function items (){
  
 ];
 }
-else {
+else if(keycloak.hasRealmRole('Provider')){
   return [
     {
       href: '/app/dashboard',
@@ -68,6 +68,10 @@ else {
     
    
   ];
+}
+
+else {
+  return [];
 }}
 const useStyles = makeStyles(() => ({
   mobileDrawer: {

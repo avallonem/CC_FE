@@ -12,6 +12,7 @@ import {
   TextField,
   makeStyles
 } from '@material-ui/core';
+import keycloak from 'src/';
 
 const states = [
   {
@@ -59,7 +60,6 @@ const ProfileDetails = ({ className, ...rest }) => {
     >
       <Card>
         <CardHeader
-          subheader="The information can be edited"
           title="Profile"
         />
         <Divider />
@@ -80,7 +80,7 @@ const ProfileDetails = ({ className, ...rest }) => {
                 name="firstName"
                 onChange={handleChange}
                 required
-                value={values.firstName}
+                value={keycloak.idTokenParsed.given_name}
                 variant="outlined"
               />
             </Grid>
@@ -95,7 +95,35 @@ const ProfileDetails = ({ className, ...rest }) => {
                 name="lastName"
                 onChange={handleChange}
                 required
-                value={values.lastName}
+                value={keycloak.idTokenParsed.family_name}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label="Gender"
+                name="gender"
+                onChange={handleChange}
+                value={keycloak.idTokenParsed.gender}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label="Fiscal Number"
+                name="fiscal number"
+                onChange={handleChange}
+                value={keycloak.idTokenParsed.fiscal_number}
                 variant="outlined"
               />
             </Grid>
@@ -109,8 +137,7 @@ const ProfileDetails = ({ className, ...rest }) => {
                 label="Email Address"
                 name="email"
                 onChange={handleChange}
-                required
-                value={values.email}
+                value={keycloak.idTokenParsed.email}
                 variant="outlined"
               />
             </Grid>
@@ -124,8 +151,7 @@ const ProfileDetails = ({ className, ...rest }) => {
                 label="Phone Number"
                 name="phone"
                 onChange={handleChange}
-                type="number"
-                value={values.phone}
+                value={keycloak.idTokenParsed.mobile_phone}
                 variant="outlined"
               />
             </Grid>
@@ -136,11 +162,10 @@ const ProfileDetails = ({ className, ...rest }) => {
             >
               <TextField
                 fullWidth
-                label="Country"
+                label="Country of Birth"
                 name="country"
                 onChange={handleChange}
-                required
-                value={values.country}
+                value={keycloak.idTokenParsed.country_of_birth}
                 variant="outlined"
               />
             </Grid>
@@ -151,40 +176,15 @@ const ProfileDetails = ({ className, ...rest }) => {
             >
               <TextField
                 fullWidth
-                label="Select State"
-                name="state"
+                label="City of Birth"
+                name="city"
                 onChange={handleChange}
-                required
-                select
-                SelectProps={{ native: true }}
-                value={values.state}
+                value={keycloak.idTokenParsed.place_of_birth}
                 variant="outlined"
-              >
-                {states.map((option) => (
-                  <option
-                    key={option.value}
-                    value={option.value}
-                  >
-                    {option.label}
-                  </option>
-                ))}
-              </TextField>
+              />
             </Grid>
           </Grid>
         </CardContent>
-        <Divider />
-        <Box
-          display="flex"
-          justifyContent="flex-end"
-          p={2}
-        >
-          <Button
-            color="primary"
-            variant="contained"
-          >
-            Save details
-          </Button>
-        </Box>
       </Card>
     </form>
   );

@@ -13,9 +13,10 @@ import {
   Typography,
   makeStyles
 } from '@material-ui/core';
+import keycloak from 'src/';
 
 const user = {
-  avatar: '/static/images/avatars/avatar_6.png',
+  avatar: '',
   city: 'Los Angeles',
   country: 'USA',
   jobTitle: 'Senior Developer',
@@ -54,33 +55,18 @@ const Profile = ({ className, ...rest }) => {
             gutterBottom
             variant="h3"
           >
-            {user.name}
+            {keycloak.idTokenParsed.given_name + ' ' + keycloak.idTokenParsed.family_name}
           </Typography>
-          <Typography
-            color="textSecondary"
-            variant="body1"
-          >
-            {`${user.city} ${user.country}`}
-          </Typography>
+          
           <Typography
             className={classes.dateText}
             color="textSecondary"
             variant="body1"
           >
-            {`${moment().format('hh:mm A')} ${user.timezone}`}
+            {`${moment().format('hh:mm A')}`}
           </Typography>
         </Box>
       </CardContent>
-      <Divider />
-      <CardActions>
-        <Button
-          color="primary"
-          fullWidth
-          variant="text"
-        >
-          Upload picture
-        </Button>
-      </CardActions>
     </Card>
   );
 };

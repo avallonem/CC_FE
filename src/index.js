@@ -18,11 +18,8 @@ keycloak.init({ onLoad: 'login-required' }).success((authenticated) => {
 	   
        console.info("Authenticated");
        console.info(JSON.stringify(keycloak.idTokenParsed));
-       console.info(keycloak.hasRealmRole('Customer'));
-       console.info(keycloak.hasRealmRole('Provider'));
+       if (keycloak.hasRealmRole('Customer')|keycloak.hasRealmRole('Provider')){
 
-   }
- 
    //React Render on authentication
  ReactDOM.render((<BrowserRouter>
     <App />
@@ -37,8 +34,11 @@ keycloak.init({ onLoad: 'login-required' }).success((authenticated) => {
    sessionStorage.setItem('preferredUsername', keycloak.preferredUsername);
    if(keycloak.hasRealmRole('Provider')){sessionStorage.setItem('role', 'Provider');}
    if(keycloak.hasRealmRole('Customer')){sessionStorage.setItem('role', 'Customer');}
-   
-
+ } 
+  else {ReactDOM.render((<div>
+    <h1>User not authorized </h1>
+  </div>), document.getElementById('root'));}
+   }
 //to regenerate token on expiry
 setTimeout(() => {
        keycloak.updateToken(70).success((refreshed) => {
