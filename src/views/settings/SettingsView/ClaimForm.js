@@ -21,7 +21,7 @@ import {
   ExpansionPanelActions
 } from '@material-ui/core';
 import Web3 from 'web3';
-import { pensionNotarization } from './abis.js';
+import { pensionNotarization } from 'src/abis.js';
 import keycloak from 'src/';
 import AlertDialog from './AlertDialog';
 import configData from 'src/config.json';
@@ -137,7 +137,7 @@ const ClaimForm = ({ className, ...rest }) => {
             label="Surname"
             margin="normal"
             name="confirm"
-			      defaultValue={keycloak.idTokenParsed.family_name}
+			      defaultValuevalue={keycloak.idTokenParsed.family_name}
             onChange={handleChange}
             variant="outlined"
           />

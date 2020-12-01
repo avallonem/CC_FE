@@ -6,6 +6,14 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Web3 from 'web3';
+import { Escrow } from 'src/abis.js';
+import configData from 'src/config.json';
+
+const web3 = new Web3(Web3.givenProvider);
+const contractAddr = configData.ESCROW_CONTRACT;
+const returnedAddr = configData.ADDRESS_RETURNED;
+const MyContract = new web3.eth.Contract(Escrow, contractAddr);
 
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
@@ -18,8 +26,18 @@ export default function FormDialog() {
     setOpen(false);
   };
 
-  const handleDeposit = () => {
+  const handleDeposit = async (e) =>  {
+    e.preventDefault();    
     setOpen(false);
+    const accounts = await window.ethereum.enable();
+  const account = accounts[0];
+  const gas = await MyContract.methods.deposit(returnedAddr)
+                      .estimateGas();
+  const result = await MyContract.methods.deposit(returnedAddr).send({
+    from: account,
+    gas 
+  })
+  console.info(result);
   };
 
   return (

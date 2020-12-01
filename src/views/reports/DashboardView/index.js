@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
+import { useEffect } from 'react';
+import { useNavigate} from 'react-router-dom';
+import { useState } from 'react';
 import {
   Container,
   Grid,
-  makeStyles
+  makeStyles,
+  Button
 } from '@material-ui/core';
 import Page from 'src/components/Page';
 import Budget from './Budget';
 import LatestOrders from './LatestOrders';
 import AvailableAssets from './AvailableAssets';
 import DepositAsset from './DepositAsset';
+import CreatedAssets from './CreatedAssets';
 import Sales from './Sales';
 import TasksProgress from './TasksProgress';
 import TotalCustomers from './TotalCustomers';
@@ -17,6 +22,7 @@ import TrafficByDevice from './TrafficByDevice';
 import Wallet from './Wallet';
 import Keycloak from 'keycloak-js';
 import keycloak from 'src/';
+import configData from 'src/config.json';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,7 +36,14 @@ const useStyles = makeStyles((theme) => ({
 
 const Dashboard = () => {
   const classes = useStyles();
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [products, setItems] = useState([]);
+  let navigate = useNavigate();
+   
+
   if(keycloak.hasRealmRole('Customer')){
+   
   return (
     
       <Page
@@ -94,7 +107,8 @@ const Dashboard = () => {
    
   );
   }
-  else if(keycloak.hasRealmRole('Provider')){return(
+  else if(keycloak.hasRealmRole('Provider')){
+    return(
 
 <Page
       className={classes.root}
@@ -133,13 +147,21 @@ const Dashboard = () => {
           >
             <LatestOrders />
           </Grid>
+          <Grid
+            item
+            lg={12}
+            md={12}
+            xl={9}
+            xs={12}
+          >
+            <CreatedAssets/>
+          </Grid>
         </Grid>
       </Container>
     </Page>
 
 
   )}
-
 };
 
 export default Dashboard;

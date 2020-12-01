@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import {
@@ -13,6 +14,13 @@ import {
 } from '@material-ui/core';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import PeopleIcon from '@material-ui/icons/PeopleOutlined';
+import Web3 from 'web3';
+import { ERC20Basic } from 'src/abis.js';
+import configData from 'src/config.json';
+
+const web3 = new Web3(Web3.givenProvider);
+const contractAddr = configData.ERC20_CONTRACT;
+const MyContract = new web3.eth.Contract(ERC20Basic, contractAddr);
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,9 +40,41 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+
+
+
 const TotalCustomers = ({ className, ...rest }) => {
   const classes = useStyles();
-
+  const [balance,setBalance]=useState('0')
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  useEffect(() => {
+    e.preventDefault();    
+    console.info("entro nel metodo");
+    const Web3 = require("web3");
+  
+    
+    const web3 = new Web3(new Web3.providers.HttpProvider(configData.BLOCKCHAIN_URL))
+    const accounts = await window.ethereum.enable();
+    
+    const gas = await MyContract.methods.balanceOf(account)
+                        .estimateGas();
+    const result = await MyContract.methods.balanceOf(account).send({
+      from: account,
+      gas 
+    })
+    const account= web3.eth.getAccounts[0];
+    MyContract.methods.balanceOf(account, function(err, result) {
+    if (err) {
+      console.log(err)
+    } else {
+      console.info("ETH "+web3.utils.fromWei(result, "ether") );
+      setBalance("ETH "+ web3.utils.fromWei(result, "ether") );
+      setIsLoaded(true);
+    }
+  })
+}, [])
+  
   return (
     <Card
       className={clsx(classes.root, className)}
@@ -58,7 +98,7 @@ const TotalCustomers = ({ className, ...rest }) => {
               color="textPrimary"
               variant="h3"
             >
-              ETH 50,7685
+              {balance}
             </Typography>
           </Grid>
           <Grid item>
@@ -72,6 +112,8 @@ const TotalCustomers = ({ className, ...rest }) => {
     </Card>
   );
 };
+
+
 
 TotalCustomers.propTypes = {
   className: PropTypes.string
