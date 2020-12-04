@@ -55,6 +55,19 @@ const AssetForm = ({ className, ...rest }) => {
   
   const handleSubmit = async (e) => {
   e.preventDefault();    
+  const accounts = await window.ethereum.enable();
+  const account = accounts[0];
+  console.info("l'indirizzo del provider è "+account);
+  
+  const gas = await MyContract.methods.token()
+                      .estimateGas();
+ // const gas=0;
+  const result = await MyContract.methods.token().send({
+    from: account,
+    gas 
+  })
+  console.info(result);
+  console.info(result.to);
   
   const requestOptions = {
     method: 'POST',
@@ -63,23 +76,15 @@ const AssetForm = ({ className, ...rest }) => {
     'title':values.title,
     'description':values.description,
     'terms':values.terms,
-    'provider': values.provider
+    'provider': keycloak.idTokenParsed.given_name+" "+keycloak.idTokenParsed.family_name,
+    'address_provider': account,
+    'address_deposit_contract': result.to
   })
 };
   
     
     fetch(configData.BACKEND_URL + '/api/assets',requestOptions).then(res => res.json())
 
-  const accounts = await window.ethereum.enable();
-  const account = accounts[0];
-  const gas = await MyContract.methods.token()
-                      .estimateGas();
-  const result = await MyContract.methods.token().send({
-    from: account,
-    gas 
-  })
-  console.info(result);
-  
   navigate('/app/dashboard');
 }
 
@@ -120,6 +125,7 @@ const AssetForm = ({ className, ...rest }) => {
             onChange={handleChange}
             variant="outlined"
           />
+          
 		   
 		   
         </CardContent>

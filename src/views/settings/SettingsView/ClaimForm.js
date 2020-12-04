@@ -89,22 +89,26 @@ const ClaimForm = ({ className, ...rest }) => {
     'mobile_phone': keycloak.idTokenParsed.mobile_phone,
     'gender': keycloak.idTokenParsed.gender,
     'asset_title': sessionStorage.getItem('asset_title'),
-    'asset_description': sessionStorage.getItem('asset_description') 
+    'asset_description': sessionStorage.getItem('asset_description'),
+    'asset_terms':sessionStorage.getItem('asset_terms'),
+    'asset_provider':sessionStorage.getItem('asset_provider'),
+    'asset_address_provider': sessionStorage.getItem('asset_address_provider'),
+    'asset_addres_deposit_contract': sessionStorage.getItem('asset_address_deposit_contract')
   })
 };
   if (products.length<1){
-    
-    fetch(configData.BACKEND_URL + '/api/customers',requestOptions).then(res => res.json())
-
   const accounts = await window.ethereum.enable();
   const account = accounts[0];
   const gas = await MyContract.methods.setContract('1','lucrezia | borgia')
                       .estimateGas();
-  const result = await MyContract.methods.setContract('1','lucrezia | borgia').send({
+  // const gas=0;
+  const result = await MyContract.methods.setContract('1','prova').send({
     from: account,
     gas 
   })
   console.info(result);
+  fetch(configData.BACKEND_URL + '/api/customers',requestOptions).then(res => res.json())
+
   navigate('/app/products');
   }else window.alert('Utente già registrato ad un fondo pensione');
 

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import clsx from 'clsx';
 import moment from 'moment';
 import { v4 as uuid } from 'uuid';
@@ -21,69 +22,10 @@ import {
   makeStyles
 } from '@material-ui/core';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+import keycloak from 'src/';
+import configData from 'src/config.json';
 
-const data = [
-  {
-    id: uuid(),
-    ref: 'Received ETH',
-    amount: 10.5,
-    customer: {
-      name: '0x846198724981209847019274'
-    },
-    createdAt: 1555016400000,
-    status: 'pending'
-  },
-  {
-    id: uuid(),
-    ref: 'Received ETH',
-    amount: 25.1,
-    customer: {
-      name: '0x846198724981209847019274'
-    },
-    createdAt: 1555016400000,
-    status: 'delivered'
-  },
-  {
-    id: uuid(),
-    ref: 'Sent ETH',
-    amount: 10.99,
-    customer: {
-      name: '0x846198724981209847019274'
-    },
-    createdAt: 1554930000000,
-    status: 'refunded'
-  },
-  {
-    id: uuid(),
-    ref: 'Received ETH',
-    amount: 96.43,
-    customer: {
-      name: '0x846198724981209847019274'
-    },
-    createdAt: 1554757200000,
-    status: 'pending'
-  },
-  {
-    id: uuid(),
-    ref: 'Received ETH',
-    amount: 32.54,
-    customer: {
-      name: '0x846198724981209847019274'
-    },
-    createdAt: 1554670800000,
-    status: 'delivered'
-  },
-  {
-    id: uuid(),
-    ref: 'Sent ETH',
-    amount: 16.76,
-    customer: {
-      name: '0x846198724981209847019274'
-    },
-    createdAt: 1554670800000,
-    status: 'delivered'
-  }
-];
+
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -94,8 +36,37 @@ const useStyles = makeStyles(() => ({
 
 const LatestOrders = ({ className, ...rest }) => {
   const classes = useStyles();
-  const [orders] = useState(data);
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [orders, setItems] = useState([]);
 
+  // Note: the empty deps array [] means
+  // this useEffect will run once
+  // similar to componentDidMount()
+  useEffect(() => {
+    
+    fetch(configData.BACKEND_URL + '/api/transactions?from_name=' + keycloak.idTokenParsed.family_name)
+      .then(res => res.json())
+      .then(
+        (orders) => {
+          setIsLoaded(true);
+          setItems(orders);
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          setIsLoaded(true);
+          setError(error);
+        }
+      )
+  }, [])
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  } else if (!isLoaded) {
+    return <div>Loading...</div>;
+  } else {
   return (
     <Card
       className={clsx(classes.root, className)}
@@ -135,14 +106,12 @@ const LatestOrders = ({ className, ...rest }) => {
             <TableBody>
               {orders.map((order) => (
                 <TableRow
-                  hover
-                  key={order.id}
                 >
                   <TableCell>
-                    {order.ref}
+                    {order.description}
                   </TableCell>
                   <TableCell>
-                    {order.customer.name}
+                    {order.from_address}
                   </TableCell>
 			
                   <TableCell>
@@ -178,7 +147,7 @@ const LatestOrders = ({ className, ...rest }) => {
     </Card>
   );
 };
-
+}
 LatestOrders.propTypes = {
   className: PropTypes.string
 };

@@ -107,7 +107,7 @@ const DepositAsset = ({ className, ...rest }) => {
     >
       <CardHeader
         subtitle={`${products.length} in total`}
-        title="Owned Financial Assets"
+        title="Subscribed Pension Funds"
       />
       <Divider />
       <List>
@@ -119,7 +119,10 @@ const DepositAsset = ({ className, ...rest }) => {
             <ListItemText
               primary={product.asset_title}
             />
-                <FormDialog/>
+                <FormDialog
+                asset_provider={product.asset_provider}
+                asset_address_provider={product.asset_address_provider}
+                />
           </ListItem>
         ))}
       </List>

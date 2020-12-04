@@ -30,6 +30,25 @@ export const pensionNotarization = [
 				"internalType": "string",
 				"name": "_id",
 				"type": "string"
+			}
+		],
+		"name": "getContracts",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_id",
+				"type": "string"
 			},
 			{
 				"internalType": "string",
@@ -40,25 +59,6 @@ export const pensionNotarization = [
 		"name": "setContract",
 		"outputs": [],
 		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_id",
-				"type": "string"
-			}
-		],
-		"name": "getPF",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
 		"type": "function"
 	}
 ];

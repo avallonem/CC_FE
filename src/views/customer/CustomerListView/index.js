@@ -135,8 +135,12 @@ const CustomerListView = ({ className, ...rest }) => {
           <Button size="small" color="primary" onClick={() => {
           sessionStorage.setItem('asset_title',product.title);
           sessionStorage.setItem('asset_description',product.description);
+          sessionStorage.setItem('asset_terms',product.terms);
+          sessionStorage.setItem('asset_provider',product.provider);
+          sessionStorage.setItem('asset_provider_address',product.provider_address);
+          sessionStorage.setItem('asset_address_deposit_contract',product.address_deposit_contract);
         }} href='/app/claim'>
-            CLAIM
+            SUBSCRIBE
           </Button>
         </ExpansionPanelActions>
       </ExpansionPanel>

@@ -48,12 +48,12 @@ function items (){
    {
     href: '/app/products',
     icon: ShoppingBagIcon,
-    title: 'Portfolio'
+    title: 'Subscribed Funds'
   },
   {
     href: '/app/customers',
     icon: ShoppingBagIcon,
-    title: 'Claim Financial Asset'
+    title: 'Available Funds'
   },
  
 ];
@@ -63,7 +63,7 @@ else if(keycloak.hasRealmRole('Provider')){
     {
       href: '/app/dashboard',
       icon: BarChartIcon,
-      title: 'Dashboard'
+      title: 'Financial Provider Dashboard'
     },
     
    
