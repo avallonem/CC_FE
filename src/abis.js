@@ -362,6 +362,11 @@ export const Escrow = [
 				"internalType": "address",
 				"name": "payee",
 				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
 			}
 		],
 		"name": "deposit",

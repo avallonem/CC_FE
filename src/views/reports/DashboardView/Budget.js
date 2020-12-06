@@ -62,12 +62,13 @@ const Budget = ({ className, ...rest }) => {
   useEffect(() => {
   const web3 = new Web3(new Web3.providers.HttpProvider(configData.BLOCKCHAIN_URL))
   const account= web3.eth.getAccounts[0];
-  web3.eth.getBalance("0xaC3D8B6D7e55aC78C9fa34DcE86d9BdaD36cE11B", function(err, result) {
+  web3.eth.getBalance("0x2794B59a0a49c9E25b5E958696cDb7100eA1AAB5", function(err, result) {
     if (err) {
       console.log(err)
     } else {
       console.info("ETH "+web3.utils.fromWei(result, "ether") );
       setBalance("ETH "+ web3.utils.fromWei(result, "ether") );
+      sessionStorage.setItem('balance',web3.utils.fromWei(result, "ether"));
       setIsLoaded(true);
     }
   })

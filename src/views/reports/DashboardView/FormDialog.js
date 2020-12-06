@@ -12,6 +12,7 @@ import { Escrow } from 'src/abis.js';
 import { ERC20Basic } from 'src/abis.js';
 import configData from 'src/config.json';
 import keycloak from 'src';
+import { DesktopWindows } from '@material-ui/icons';
 
 const web3 = new Web3(Web3.givenProvider);
 const contractAddr = configData.ESCROW_CONTRACT;
@@ -22,7 +23,7 @@ const MyContract = new web3.eth.Contract(Escrow, contractAddr);
 //const SecondContract = new web3.eth.Contract(ERC20Basic, configData.ERC20_CONTRACT);
 const FormDialog = ({asset_provider, asset_address_provider }) => {
   const [open, setOpen] = React.useState(false);
-
+  const [amount, setAmount] = React.useState('0');
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -31,14 +32,19 @@ const FormDialog = ({asset_provider, asset_address_provider }) => {
     setOpen(false);
   };
 
+  const updateInputValue = (evt) => {
+    setAmount(evt.target.value)
+    }
+
   const handleDeposit = async (e) =>  {
     e.preventDefault();    
     setOpen(false);
     const accounts = await window.ethereum.enable();
   const account = accounts[0];
-  const gas = await MyContract.methods.deposit(returnedAddr)
+  console.info(amount);
+  const gas = await MyContract.methods.deposit(returnedAddr,amount)
                       .estimateGas();
-  const result = await MyContract.methods.deposit(returnedAddr).send({
+  const result = await MyContract.methods.deposit(returnedAddr,amount).send({
     from: account,
     gas 
   })
@@ -54,7 +60,7 @@ const FormDialog = ({asset_provider, asset_address_provider }) => {
   const result = await SecondContract.methods.balanceOf(account).call();
   console.info(result);
   };*/
-  
+  console.info(e.value);
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -64,15 +70,15 @@ const FormDialog = ({asset_provider, asset_address_provider }) => {
     'to_address':asset_address_provider,
     'to_name': asset_provider,
     'description': 'Deposit ETH in Fund',
-    'amount': '1 ETH'
+    'amount': amount
   })
 };
   
     
-    fetch(configData.BACKEND_URL + '/api/transactions',requestOptions).then(res => res.json())
+    fetch(configData.BACKEND_URL + '/api/transactions',requestOptions).then(res => {res.json();window.location.reload(true);})
 
 
-
+  
 
 
 }
@@ -87,7 +93,7 @@ const FormDialog = ({asset_provider, asset_address_provider }) => {
           <DialogContentText>
             Please enter the amount of cryptocurrency that you want to deposit in the fund
           </DialogContentText>
-          <TextField autofocus margin="dense" id="deposit" label="Ether to Deposit" variant="outlined" fullWidth/>
+          <TextField autofocus margin="dense" id="deposit" label="Ether to Deposit" variant="outlined" fullWidth value={amount} onChange={evt => updateInputValue(evt)}/>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

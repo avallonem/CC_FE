@@ -130,20 +130,7 @@ const LatestOrders = ({ className, ...rest }) => {
           </Table>
         </Box>
       </PerfectScrollbar>
-      <Box
-        display="flex"
-        justifyContent="flex-end"
-        p={2}
-      >
-        <Button
-          color="primary"
-          endIcon={<ArrowRightIcon />}
-          size="small"
-          variant="text"
-        >
-          View all
-        </Button>
-      </Box>
+ 
     </Card>
   );
 };

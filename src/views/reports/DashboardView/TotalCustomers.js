@@ -18,6 +18,7 @@ import PeopleIcon from '@material-ui/icons/PeopleOutlined';
 import Web3 from 'web3';
 import { ERC20Basic } from 'src/abis.js';
 import configData from 'src/config.json';
+import keycloak from 'src/';
 /*
 const web3 = new Web3(Web3.givenProvider);
 const contractAddr = configData.ERC20_CONTRACT;
@@ -46,9 +47,12 @@ const useStyles = makeStyles((theme) => ({
 
 const TotalCustomers = ({ className, ...rest }) => {
   const classes = useStyles();
-  const [balance,setBalance]=useState('0')
+  const [balance,setBalance]=useState(0);
   const [amount, setAmount] = useState(0);
+  const [orders, setItems] = useState([]);
   const [result, setResult] = useState(0);
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
   /*useEffect(() => {
     
     console.info("entro nel metodo");
@@ -77,6 +81,38 @@ const TotalCustomers = ({ className, ...rest }) => {
    
 }, [])
   */
+
+ useEffect(() => {
+    
+  fetch(configData.BACKEND_URL + '/api/transactions?from_name=' + keycloak.idTokenParsed.family_name)
+    .then(res => res.json())
+    .then(
+      (orders) => {
+        setIsLoaded(true);
+        setItems(orders);
+      setBalance(orders.reduce( function(a, b){
+        return a + parseInt(b.amount);
+    }, 0));
+      },
+      // Note: it's important to handle errors here
+      // instead of a catch() block so that we don't swallow
+      // exceptions from actual bugs in components.
+      (error) => {
+        setIsLoaded(true);
+        setError(error);
+      }
+    )
+}, [])
+
+if (error) {
+  return <div>Error: {error.message}</div>;
+} else if (!isLoaded) {
+  return <div>Loading...</div>;
+} else {
+
+
+
+
   return (
     <Card
       className={clsx(classes.root, className)}
@@ -100,7 +136,7 @@ const TotalCustomers = ({ className, ...rest }) => {
               color="textPrimary"
               variant="h3"
             >
-              {result}
+              {"ETH "+ balance}
             </Typography>
           </Grid>
           <Grid item>
@@ -115,7 +151,7 @@ const TotalCustomers = ({ className, ...rest }) => {
   );
 };
 
-
+}
 
 TotalCustomers.propTypes = {
   className: PropTypes.string
