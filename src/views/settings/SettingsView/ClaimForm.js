@@ -29,7 +29,7 @@ import configData from 'src/config.json';
 const web3 = new Web3(Web3.givenProvider);
 const contractAddr = configData.NOTARIZATION_CONTRACT;
 const MyContract = new web3.eth.Contract(pensionNotarization, contractAddr);
-
+var md5 = require('md5');
 
 const useStyles = makeStyles(({
   root: {}
@@ -42,6 +42,7 @@ const ClaimForm = ({ className, ...rest }) => {
     surname: ''
   });
   const [contatore, setContatore] = useState(0);
+  const [hashed,setHashed]=useState(0);
   const stringa=values.name + values.surname;
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -93,24 +94,27 @@ const ClaimForm = ({ className, ...rest }) => {
     'asset_terms':sessionStorage.getItem('asset_terms'),
     'asset_provider':sessionStorage.getItem('asset_provider'),
     'asset_address_provider': sessionStorage.getItem('asset_address_provider'),
-    'asset_addres_deposit_contract': sessionStorage.getItem('asset_address_deposit_contract')
+    'asset_address_deposit_contract': sessionStorage.getItem('asset_address_deposit_contract')
   })
 };
   if (products.length<1){
+   setHashed(md5(keycloak.idTokenParsed.family_name));
+  
+
   const accounts = await window.ethereum.enable();
   const account = accounts[0];
-  const gas = await MyContract.methods.setContract('1','lucrezia | borgia')
+  const gas = await MyContract.methods.setContract('1',hashed)
                       .estimateGas();
   // const gas=0;
-  const result = await MyContract.methods.setContract('1','prova').send({
+  const result = await MyContract.methods.setContract('1',hashed).send({
     from: account,
     gas 
   })
   console.info(result);
   fetch(configData.BACKEND_URL + '/api/customers',requestOptions).then(res => res.json())
-
+  
   navigate('/app/products');
-  }else window.alert('Utente già registrato ad un fondo pensione');
+  }else window.alert('Unauthorized request: You are already registered to a Pension Fund');
 
 
 
@@ -218,13 +222,12 @@ const ClaimForm = ({ className, ...rest }) => {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography className={classes.heading}>
-		  <h4>TERMS 1.</h4> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		  <h4>TERMS 2.</h4> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		  <h4>TERMS 3.</h4> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		  <h4>TERMS 4.</h4> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		  <h4>TERMS 5.</h4> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		  <h4>TERMS 6.</h4> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-	      <h4>TERMS 7.</h4> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		  <h4>TERMS 1.</h4> You’ll open your Pension by completing the online application. When you do this we’ll set up an account for you and you’ll become a member of the scheme. 
+		  <h4>TERMS 2.</h4> The scheme provides pension accounts for many customers, of whom you are one. The money that you pay in builds up to create your pension pot. The Personal Pension is suitable for eligible customers who want to save towards their retirement, and are happy to make their own investment decisions. You’ll have access to a range of investment options to meet your attitude to risk as well as online support.
+		  <h4>TERMS 3.</h4> The scheme was established by a declaration of trust and is governed by a set of scheme rules which are required for it to be a registered pension scheme. The investments and money in the scheme are held by the trustee in the trustee’s name. Benefits under the scheme are payable by the trustee on our instruction. We’ll automatically claim basic rate tax relief from the government, based on the value of your payment, and we’ll add it to your Pension by no later than the end of business the following working day.
+		  <h4>TERMS 4.</h4> If you pay one of the higher rates of income tax, you may be entitled to receive tax relief at the higher rate, but you’ll need to claim the additional relief through your annual self-assessment tax return. You will select how your Pension is invested according to your preferred level of risk and the Funds available. Your investment will be administered by us and assets will be held by the trustee. We may use other firms to support us in the performance of our administration duties. From time to time we may add or remove assets.
+		  <h4>TERMS 5.</h4> Where regulation and/or changes to legislation materially increase the cost and/or the complexity of the administration to us of holding a particular asset. We can’t accept any responsibility for losses, costs and/or legal fees that may be incurred as a result of your investment choices. The value of your Pension savings can go down as well as up.
+		  <h4>TERMS 6.</h4> We may change the Funds available for you to invest in your Pension from time to time. If we remove a Fund from the range available in your Pension it may mean that you need to choose an alternative Fund. If the Fund you’re invested in is removed from the available Funds we may either ask you to choose a new Fund or we may automatically move you to an alternative Fund as we deem appropriate. We’ll notify you by email if the Funds available change and if the Fund you’re invested in is affected, giving you at least 30 days’ notice before any such change takes effect. Any cash you hold in your Pension that’s not invested will be held in a bank account in the name of the trustee. You’ll be able to see the value of the cash held in your Pension at any time, by logging onto My Account. The bank account your cash is held in does not attract interest and therefore you won’t receive any return on any cash balance you hold in your Pension. 
 		  </Typography>
 		 
 		  </ExpansionPanelDetails>

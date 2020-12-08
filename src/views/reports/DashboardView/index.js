@@ -11,6 +11,7 @@ import {
 import Page from 'src/components/Page';
 import Budget from './Budget';
 import LatestOrders from './LatestOrders';
+import ProviderTransactions from './ProviderTransactions';
 import AvailableAssets from './AvailableAssets';
 import DepositAsset from './DepositAsset';
 import CreatedAssets from './CreatedAssets';
@@ -119,24 +120,7 @@ const Dashboard = () => {
           container
           spacing={3}
         >
-          <Grid
-            item
-            lg={6}
-            sm={6}
-            xl={3}
-            xs={12}
-          >
-            <Budget />
-          </Grid>
-          <Grid
-            item
-            lg={6}
-            sm={6}
-            xl={3}
-            xs={12}
-          >
-            <TotalCustomers />
-          </Grid>
+          
         
 		  <Grid
             item
@@ -145,7 +129,7 @@ const Dashboard = () => {
             xl={9}
             xs={12}
           >
-            <LatestOrders />
+            <ProviderTransactions />
           </Grid>
           <Grid
             item

@@ -34,7 +34,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const LatestOrders = ({ className, ...rest }) => {
+const ProviderTransactions = ({ className, ...rest }) => {
   const classes = useStyles();
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -45,7 +45,7 @@ const LatestOrders = ({ className, ...rest }) => {
   // similar to componentDidMount()
   useEffect(() => {
     
-    fetch(configData.BACKEND_URL + '/api/transactions?from_name=' + keycloak.idTokenParsed.family_name)
+    fetch(configData.BACKEND_URL + '/api/transactions/find?to_name=' +keycloak.idTokenParsed.given_name+" "+keycloak.idTokenParsed.family_name)
       .then(res => res.json())
       .then(
         (orders) => {
@@ -83,7 +83,10 @@ const LatestOrders = ({ className, ...rest }) => {
                   Order Ref
                 </TableCell>
                 <TableCell>
-                  Provider
+                  Customer Name
+                </TableCell>
+                <TableCell>
+                  Customer Address
                 </TableCell>
                 <TableCell sortDirection="desc">
                   <Tooltip
@@ -111,7 +114,10 @@ const LatestOrders = ({ className, ...rest }) => {
                     {order.description}
                   </TableCell>
                   <TableCell>
-                    {order.to_address}
+                    {order.from_name}
+                  </TableCell>
+                  <TableCell>
+                    {order.from_address}
                   </TableCell>
 			
                   <TableCell>
@@ -135,8 +141,8 @@ const LatestOrders = ({ className, ...rest }) => {
   );
 };
 }
-LatestOrders.propTypes = {
+ProviderTransactions.propTypes = {
   className: PropTypes.string
 };
 
-export default LatestOrders;
+export default ProviderTransactions;

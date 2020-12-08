@@ -121,7 +121,7 @@ const DepositAsset = ({ className, ...rest }) => {
             />
                 <FormDialog
                 asset_provider={product.asset_provider}
-                asset_address_provider={product.asset_address_provider}
+                asset_address_provider={product.asset_address_deposit_contract}
                 />
           </ListItem>
         ))}

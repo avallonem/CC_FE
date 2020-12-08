@@ -26,12 +26,6 @@ keycloak.init({ onLoad: 'login-required' }).success((authenticated) => {
   </BrowserRouter>), document.getElementById('root'));
  
    //store authentication tokens in sessionStorage for usage in app
-   sessionStorage.setItem('given_name', keycloak.idTokenParsed.given_name);
-   sessionStorage.setItem('id', keycloak.idTokenParsed.name);
-   sessionStorage.setItem('family_name', keycloak.idTokenParsed.family_name);
-   sessionStorage.setItem('authentication', keycloak.token);
-   sessionStorage.setItem('refreshToken', keycloak.refreshToken);
-   sessionStorage.setItem('preferredUsername', keycloak.preferredUsername);
    if(keycloak.hasRealmRole('Provider')){sessionStorage.setItem('role', 'Provider');}
    if(keycloak.hasRealmRole('Customer')){sessionStorage.setItem('role', 'Customer');}
  } 

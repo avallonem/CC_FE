@@ -42,9 +42,9 @@ const FormDialog = ({asset_provider, asset_address_provider }) => {
     const accounts = await window.ethereum.enable();
   const account = accounts[0];
   console.info(amount);
-  const gas = await MyContract.methods.deposit(returnedAddr,amount)
+  const gas = await MyContract.methods.deposit(returnedAddr,parseInt(amount))
                       .estimateGas();
-  const result = await MyContract.methods.deposit(returnedAddr,amount).send({
+  const result = await MyContract.methods.deposit(returnedAddr,parseInt(amount)).send({
     from: account,
     gas 
   })

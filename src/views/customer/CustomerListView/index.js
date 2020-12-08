@@ -21,13 +21,14 @@ import {
 } from '@material-ui/core';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionActions from '@material-ui/core/AccordionActions';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import configData from 'src/config.json';
+
 
 const styles = theme => ({
   root: {
@@ -64,15 +65,39 @@ const styles = theme => ({
   },
 });
 
-
-const useStyles = makeStyles(({
+const useStyles = makeStyles((theme) => ({
   root: {
-    height: '100%'
+    width: '100%',
   },
-  image: {
-    height: 48,
-    width: 48
-  }
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+  },
+  secondaryHeading: {
+    fontSize: theme.typography.pxToRem(15),
+    color: theme.palette.text.secondary,
+  },
+  icon: {
+    verticalAlign: 'bottom',
+    height: 20,
+    width: 20,
+  },
+  details: {
+    alignItems: 'center',
+  },
+  column: {
+    flexBasis: '33.33%',
+  },
+  helper: {
+    borderLeft: `2px solid ${theme.palette.divider}`,
+    padding: theme.spacing(1, 2),
+  },
+  link: {
+    color: theme.palette.primary.main,
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+  },
 }));
 
 
@@ -117,21 +142,36 @@ const CustomerListView = ({ className, ...rest }) => {
     >
       <CardHeader
         subtitle={`${products.length} in total`}
-        title="Available Financial Assets"
+        title="Pension Funds available for subscription"
       />
       <Divider />
         {products.map((product, i) => (
-          <ExpansionPanel>
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography className={classes.heading}>{product.title}</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
-		  {product.description}
-          </Typography>
-        </ExpansionPanelDetails>
+         <Accordion>
+         <AccordionSummary aria-controls="panel1c-content"
+      id="panel1c-header" expandIcon={<ExpandMoreIcon />}>
+        <div className={classes.column}>
+        <Typography className={classes.heading}><b>Name: </b>{product.title}</Typography>
+      </div>
+      <div className={classes.column}>
+        <Typography className={classes.secondaryHeading}><b>Provider</b>: {product.provider}</Typography>
+      </div>
+      <div className={classes.column}>
+        <Typography className={classes.secondaryHeading}><b>Provider's Address</b>: {product.address_deposit_contract}</Typography>
+      </div>
+    </AccordionSummary>
+    <AccordionDetails>
+    
+        
+    <Divider />
+      <Typography>
+  <b>Description:</b>{"    "+product.description}
+      </Typography>
+   
+  
+     
+    </AccordionDetails>
 		 <Divider />
-        <ExpansionPanelActions>
+        <AccordionActions>
           <Button size="small" color="primary" onClick={() => {
           sessionStorage.setItem('asset_title',product.title);
           sessionStorage.setItem('asset_description',product.description);
@@ -142,8 +182,8 @@ const CustomerListView = ({ className, ...rest }) => {
         }} href='/app/claim'>
             SUBSCRIBE
           </Button>
-        </ExpansionPanelActions>
-      </ExpansionPanel>
+        </AccordionActions>
+      </Accordion>
         ))}
       <Divider />
       <Box

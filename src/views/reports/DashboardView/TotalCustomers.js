@@ -14,7 +14,7 @@ import {
   makeStyles
 } from '@material-ui/core';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
-import PeopleIcon from '@material-ui/icons/PeopleOutlined';
+import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import Web3 from 'web3';
 import { ERC20Basic } from 'src/abis.js';
 import configData from 'src/config.json';
@@ -53,37 +53,10 @@ const TotalCustomers = ({ className, ...rest }) => {
   const [result, setResult] = useState(0);
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  /*useEffect(() => {
-    
-    console.info("entro nel metodo");
-    const Web3 = require("web3");
-  
-    
-    const web3 = new Web3(new Web3.providers.HttpProvider(configData.BLOCKCHAIN_URL))
-    const accounts = window.ethereum.enable();
-    const account = accounts[0];
-    console.info (configData.WALLET_ADDRESS);
-    const gas = MyContract.methods.balanceOf(configData.WALLET_ADDRESS)
-                       .estimateGas(function(error, gasAmount){
-                        console.info(gasAmount);
-                        setAmount(gasAmount);
-                    });
-    const result = MyContract.methods.balanceOf(configData.WALLET_ADDRESS).call({
-      from: configData.WALLET_ADDRESS,
-      amount
-    },function(error, res){
-      if (error) {console.info(error)}
-      else {console.info(res);
-         setResult(res);}
-    }
-    
-    )
-   
-}, [])
-  */
+
 
  useEffect(() => {
-    
+  (async () => {
   fetch(configData.BACKEND_URL + '/api/transactions?from_name=' + keycloak.idTokenParsed.family_name)
     .then(res => res.json())
     .then(
@@ -102,6 +75,7 @@ const TotalCustomers = ({ className, ...rest }) => {
         setError(error);
       }
     )
+  })();
 }, [])
 
 if (error) {
@@ -141,7 +115,7 @@ if (error) {
           </Grid>
           <Grid item>
             <Avatar className={classes.avatar}>
-              <PeopleIcon />
+              <AccountBalanceIcon />
             </Avatar>
           </Grid>
         </Grid>

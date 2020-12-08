@@ -14,9 +14,10 @@ import {
   makeStyles
 } from '@material-ui/core';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
-import MoneyIcon from '@material-ui/icons/Money';
+import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import configData from 'src/config.json';
-
+import Web3 from 'web3';
+const web3 = new Web3(Web3.givenProvider);
 
 /*
   async componentDidMount() {
@@ -58,11 +59,14 @@ const Budget = ({ className, ...rest }) => {
   const [balance,setBalance]=useState('0')
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const Web3 = require("web3")
+ 
   useEffect(() => {
-  const web3 = new Web3(new Web3.providers.HttpProvider(configData.BLOCKCHAIN_URL))
-  const account= web3.eth.getAccounts[0];
-  web3.eth.getBalance("0x2794B59a0a49c9E25b5E958696cDb7100eA1AAB5", function(err, result) {
+    (async () => {
+  //const web3 = new Web3(new Web3.providers.HttpProvider(configData.BLOCKCHAIN_URL))
+  //const account= web3.eth.getAccounts[0];
+  const accounts = await window.ethereum.enable();
+  const account = accounts[0];
+  web3.eth.getBalance(account, function(err, result) {
     if (err) {
       console.log(err)
     } else {
@@ -72,6 +76,7 @@ const Budget = ({ className, ...rest }) => {
       setIsLoaded(true);
     }
   })
+})();
 }, [])
 /*
 useEffect(() => {
@@ -99,8 +104,7 @@ if (error) {
 } else {
   return (
     <Card
-      className={clsx(classes.root, className)}
-      {...rest}
+    
     >
       <CardContent>
         <Grid
@@ -125,7 +129,7 @@ if (error) {
           </Grid>
           <Grid item>
             <Avatar className={classes.avatar}>
-              <MoneyIcon />
+              <AccountBalanceWalletIcon />
             </Avatar>
           </Grid>
         </Grid>
