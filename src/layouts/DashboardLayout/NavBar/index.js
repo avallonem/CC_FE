@@ -41,17 +41,17 @@ function getRole ()  {
 function items (){
    if(keycloak.hasRealmRole('Customer')){ return [
   {
-    href: '/app/dashboard',
+    href: '/financial/dashboard',
     icon: BarChartIcon,
     title: 'Wallet'
   },
    {
-    href: '/app/products',
+    href: '/financial/products',
     icon: ShoppingBagIcon,
     title: 'Subscribed Funds'
   },
   {
-    href: '/app/customers',
+    href: '/financial/customers',
     icon: ShoppingBagIcon,
     title: 'Available Funds'
   },
@@ -61,7 +61,7 @@ function items (){
 else if(keycloak.hasRealmRole('Provider')){
   return [
     {
-      href: '/app/dashboard',
+      href: '/financial/dashboard',
       icon: BarChartIcon,
       title: 'Financial Provider Dashboard'
     },
@@ -117,7 +117,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
           className={classes.avatar}
           component={RouterLink}
           src={user.avatar}
-          to="/app/account"
+          to="/financial/account"
         />
         <Typography
           className={classes.name}

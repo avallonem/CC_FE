@@ -113,7 +113,7 @@ const ClaimForm = ({ className, ...rest }) => {
   console.info(result);
   fetch(configData.BACKEND_URL + '/api/customers',requestOptions).then(res => res.json())
   
-  navigate('/app/products');
+  navigate('/financial/products');
   }else window.alert('Unauthorized request: You are already registered to a Pension Fund');
 
 
@@ -243,7 +243,7 @@ const ClaimForm = ({ className, ...rest }) => {
           justifyContent="flex-end"
           p={2}
         >
-          <Button href='/app/dashboard' 
+          <Button href='/financial/dashboard' 
             color="primary"
             variant="contained"
       onClick={handleSubmit}

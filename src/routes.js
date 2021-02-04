@@ -14,7 +14,7 @@ import AssetView from 'src/views/asset/AssetView';
 
 const routes = [
   {
-    path: 'app',
+    path: 'financial',
     element: <DashboardLayout />,
     children: [
       { path: 'account', element: <AccountView /> },
@@ -33,7 +33,7 @@ const routes = [
       { path: 'login', element: <LoginView /> },
       { path: 'register', element: <RegisterView /> },
       { path: '404', element: <NotFoundView /> },
-      { path: '/', element: <Navigate to="/app/dashboard" /> },
+      { path: '/', element: <Navigate to="/financial/dashboard" /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
   }

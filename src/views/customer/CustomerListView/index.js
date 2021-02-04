@@ -179,7 +179,7 @@ const CustomerListView = ({ className, ...rest }) => {
           sessionStorage.setItem('asset_provider',product.provider);
           sessionStorage.setItem('asset_provider_address',product.provider_address);
           sessionStorage.setItem('asset_address_deposit_contract',product.address_deposit_contract);
-        }} href='/app/claim'>
+        }} href='/financial/claim'>
             SUBSCRIBE
           </Button>
         </AccordionActions>
