@@ -10,7 +10,7 @@ import configData from './config.json';
 let keycloak = Keycloak('/keycloak.json');
  
 //Initialization of the keycloak instance
-keycloak.init({ onLoad: 'login-required' }).success((authenticated) => {
+keycloak.init({ onLoad: 'login-required' }).then((authenticated) => {
  
    if (!authenticated) {
        window.location.reload();
@@ -35,21 +35,21 @@ keycloak.init({ onLoad: 'login-required' }).success((authenticated) => {
    }
 //to regenerate token on expiry
 setTimeout(() => {
-       keycloak.updateToken(70).success((refreshed) => {
+       keycloak.updateToken(70).then((refreshed) => {
            if (refreshed) {
                console.debug('Token refreshed' + refreshed);
            } else {
                console.warn('Token not refreshed, valid for '
                    + Math.round(keycloak.tokenParsed.exp + keycloak.timeSkew - new Date().getTime() / 1000) + ' seconds');
            }
-       }).error(() => {
+       }).catch(() => {
            console.error('Failed to refresh token');
        });
  
  
    }, 60000)
  
-}).error(() => {
+}).catch(() => {
    console.error("Authenticated Failed");
 });
 
