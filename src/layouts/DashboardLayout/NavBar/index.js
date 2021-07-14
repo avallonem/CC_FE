@@ -73,14 +73,16 @@ else if(keycloak.hasRealmRole('Provider')){
 else {
   return [];
 }}
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   mobileDrawer: {
-    width: 256
+    width: 256,
+    color: theme.palette.background.grey
   },
   desktopDrawer: {
     width: 256,
     top: 64,
-    height: 'calc(100% - 64px)'
+    height: 'calc(100% - 64px)',
+    color: theme.palette.background.grey
   },
   avatar: {
     cursor: 'pointer',

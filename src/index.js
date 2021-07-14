@@ -47,7 +47,7 @@ setTimeout(() => {
        });
  
  
-   }, 60000)
+   }, 600000)
  
 }).error(() => {
    console.error("Authenticated Failed");

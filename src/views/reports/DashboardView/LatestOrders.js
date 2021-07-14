@@ -119,7 +119,7 @@ const LatestOrders = ({ className, ...rest }) => {
                   </TableCell>
                   <TableCell>
                     <Chip
-                      color="primary"
+                      color='#088e9d'
                       label={order.amount}
                       size="small"
                     />

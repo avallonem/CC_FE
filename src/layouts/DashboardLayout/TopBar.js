@@ -18,6 +18,7 @@ import InputIcon from '@material-ui/icons/Input';
 import Logo from 'src/components/Logo';
 import keycloak from 'src/';
 import { KeyboardCapslock } from '@material-ui/icons';
+import theme from 'src/theme';
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -47,12 +48,12 @@ const TopBar = ({
           <Logo />
         </RouterLink>
 		<Box flexGrow={1} />
-		<Typography variant="h3" className={classes.title}>
+		<Typography variant="h3" color="textPrimary" className={classes.title} >
                    FINANCIAL INFRASTRUCTURE MARKETS - Pilot Phase 1
           </Typography>
         <Box flexGrow={1} />
         <Hidden mdDown>
-          <IconButton color="inherit">
+          <IconButton color="textPrimary">
             <Badge
               badgeContent={notifications.length}
               color="primary"
@@ -61,7 +62,7 @@ const TopBar = ({
               <NotificationsIcon />
             </Badge>
           </IconButton>
-          <IconButton color="inherit" onClick={() => {
+          <IconButton color="textPrimary" onClick={() => {
             
     keycloak.logout();
   }}>

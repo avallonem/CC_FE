@@ -1,6 +1,6 @@
 {
   "realm": "FinancialInfrastructures",
-  "auth-server-url": "https://cc-keycloak.westeurope.cloudapp.azure.com:8443/auth/",
+  "auth-server-url": "https://193.48.19.180:8443/auth/",
   "ssl-required": "external",
   "resource": "financial",
   "public-client": true,

@@ -6,7 +6,7 @@ import TopBar from './TopBar';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: theme.palette.background.dark,
+    backgroundColor: 'theme.palette.background.dark',
     display: 'flex',
     height: '100%',
     overflow: 'hidden',

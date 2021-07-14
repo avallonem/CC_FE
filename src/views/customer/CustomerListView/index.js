@@ -172,7 +172,7 @@ const CustomerListView = ({ className, ...rest }) => {
     </AccordionDetails>
 		 <Divider />
         <AccordionActions>
-          <Button size="small" color="primary" onClick={() => {
+          <Button size="small" color='#088e9d' onClick={() => {
           sessionStorage.setItem('asset_title',product.title);
           sessionStorage.setItem('asset_description',product.description);
           sessionStorage.setItem('asset_terms',product.terms);

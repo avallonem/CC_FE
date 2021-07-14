@@ -84,7 +84,7 @@ const FormDialog = ({asset_provider, asset_address_provider }) => {
 }
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button variant="outlined" color='#088e9d' onClick={handleClickOpen}>
         DEPOSIT
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
