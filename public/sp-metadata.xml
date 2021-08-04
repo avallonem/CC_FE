@@ -29,4 +29,18 @@
 <md:RequestedAttribute Name="registeredOffice" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
 </md:AttributeConsumingService>
 </md:SPSSODescriptor>
+<md:Organization>
+<OrganizationName xml:lang="it">Critical-Chains</OrganizationName>
+<OrganizationDisplayName xml:lang="it">Critical-Chains</OrganizationDisplayName>
+<OrganizationURL xml:lang="it">http://spid.serviceprovider.it</OrganizationURL>
+</md:Organization>
+<md:ContactPerson contactType="other">
+<md:Extensions>
+<spid:VATNumber>IT12345678901</spid:VATNumber>
+<spid:FiscalCode>XYZABCAAMGGJ000W</spid:FiscalCode>
+<spid:Private/>
+</md:Extensions>
+<md:EmailAddress>tech-info@example.org</md:EmailAddress>
+<md:TelephoneNumber>+39 8472345634785</md:TelephoneNumber>
+</md:ContactPerson>
 </md:EntityDescriptor>
