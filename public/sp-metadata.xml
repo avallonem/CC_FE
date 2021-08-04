@@ -1,4 +1,4 @@
-<md:EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" entityID="https://cc-keycloak.westeurope.cloudapp.azure.com:8443/auth/realms/FinancialInfrastructures" ID="ID_4f95afed-bbd4-4c9e-8bc1-24a5185e0075">
+<md:EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" entityID="https://cc-keycloak.westeurope.cloudapp.azure.com:8443/auth/realms/FinancialInfrastructures" ID="ID_9b2cd21a-a6b1-4d74-a59e-5b7dff3d13dc">
 <md:SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol" AuthnRequestsSigned="true" WantAssertionsSigned="false">
 <md:KeyDescriptor use="signing">
 <ds:KeyInfo>
@@ -7,9 +7,9 @@
 </ds:X509Data>
 </ds:KeyInfo>
 </md:KeyDescriptor>
-<md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://cc-keycloak.westeurope.cloudapp.azure.com:8443/auth/realms/FinancialInfrastructures/broker/spid/endpoint"/>
+<md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://cc-keycloak.westeurope.cloudapp.azure.com:8443/auth/realms/FinancialInfrastructures/broker/SPID%20TEST/endpoint"/>
 <md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</md:NameIDFormat>
-<md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://cc-keycloak.westeurope.cloudapp.azure.com:8443/auth/realms/FinancialInfrastructures/broker/spid/endpoint" isDefault="true" index="1"/>
+<md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://cc-keycloak.westeurope.cloudapp.azure.com:8443/auth/realms/FinancialInfrastructures/broker/SPID%20TEST/endpoint" isDefault="true" index="1"/>
 <md:AttributeConsumingService index="1">
 <md:ServiceName xml:lang="en">My online services</md:ServiceName>
 <md:RequestedAttribute Name="name" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
