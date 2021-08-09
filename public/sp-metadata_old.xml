@@ -10,7 +10,7 @@
 <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://cc-keycloak.westeurope.cloudapp.azure.com:8443/auth/realms/FinancialInfrastructures/broker/SPID%20TEST/endpoint"/>
 <md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</md:NameIDFormat>
 <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://cc-keycloak.westeurope.cloudapp.azure.com:8443/auth/realms/FinancialInfrastructures/broker/SPID%20TEST/endpoint" isDefault="true" index="1"/>
-<md:AttributeConsumingService index="0">
+<md:AttributeConsumingService index="1">
 <md:ServiceName xml:lang="en">My online services</md:ServiceName>
 <md:RequestedAttribute Name="name" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
 <md:RequestedAttribute Name="familyName" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
