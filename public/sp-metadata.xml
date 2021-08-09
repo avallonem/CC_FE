@@ -1,4 +1,4 @@
-<md:EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" entityID="https://cc-keycloak.westeurope.cloudapp.azure.com:8443/auth/realms/FinancialInfrastructures" ID="ID_9b2cd21a-a6b1-4d74-a59e-5b7dff3d13dc">
+<md:EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:spid="https://spid.gov.it/saml-extensions" entityID="https://cc-keycloak.westeurope.cloudapp.azure.com:8443/auth/realms/FinancialInfrastructures" ID="ID_9b2cd21a-a6b1-4d74-a59e-5b7dff3d13dc">
 <md:SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol" AuthnRequestsSigned="true" WantAssertionsSigned="false">
 <md:KeyDescriptor use="signing">
 <ds:KeyInfo>
