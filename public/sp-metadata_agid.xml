@@ -1,0 +1,45 @@
+<md:EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:spid="https://spid.gov.it/saml-extensions" entityID="https://cc-keycloak.westeurope.cloudapp.azure.com:8443/auth/realms/FinancialInfrastructures" ID="ID_0301f0e4-8413-4e4d-a392-70b3ad04557d">
+<md:SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol" AuthnRequestsSigned="true" WantAssertionsSigned="false">
+<md:KeyDescriptor use="signing">
+<ds:KeyInfo>
+<ds:X509Data>
+<ds:X509Certificate>MIICvzCCAacCBgF1ZObIfjANBgkqhkiG9w0BAQsFADAjMSEwHwYDVQQDDBhGaW5hbmNpYWxJbmZyYXN0cnVjdHVyZXMwHhcNMjAxMDI2MTIzMjI3WhcNMzAxMDI2MTEzNDA3WjAjMSEwHwYDVQQDDBhGaW5hbmNpYWxJbmZyYXN0cnVjdHVyZXMwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDCqg3fa+GzzwI2l4WCpfH2B8KYQn7KgJ4fr3C64MYtseKHbyPDhxwrl8YwC6kO1FJZEzgpx9xCJd4yFbNdFBKXcUJWE9eCalNnKphAw4aCv0Ool7z93yqYcs3Jy7qsQ5l9VcPRpbeG5j2sgK2m/yhI1CzlB6LH65hhih962+RhIis/gIAfvZ4satycHFpVwe3Mq8d2ZEUjLPJIcS3TGUxt7bK6XxeRLI7fkd1a4U4DhfP7ni4Tx6CUjqrxGFL36hlEnS+54bxH4u/amDiq9vLr5zZ8Soh7uSiEj3tli3a7gichol4CejZYeXGkmk1tMElUXF/XxWThkZx0hm9tRtqfAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAJNJsOxEEe+15dSmuQ8JhhdHdre1zTwoCmJC+ce1pOUvsYgZar/M7rsg2EUD2jITLL1+GTSGSkjfuj41nxT5avHHMZcmBHnVdWQJR3KA/VzPOevYrenuQ1lAArMhLSD5qhO+7kRaDLFJOkAj1M97b/UsdsBM+3pjkCskzWCf0SwZpBXhkuL9v/GqzUAGr5h+ACmiy74WlldpOK/pd/cYyd9hsIWClTUst/D8/zGY/WX/6oZJKtRp0ExAiIM4Fr4t4AN9DIUEAHdiBHe760femsIl8fQqcvSa7rKzOXt1D+BpVkFr/MFmYEVvEUXhu/XWuF8aXttrgDNq3KpHvtnm+eY=</ds:X509Certificate>
+</ds:X509Data>
+</ds:KeyInfo>
+</md:KeyDescriptor>
+<md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://cc-keycloak.westeurope.cloudapp.azure.com:8443/auth/realms/FinancialInfrastructures/broker/SPIDTESTNEW/endpoint"/>
+<md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</md:NameIDFormat>
+<md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://cc-keycloak.westeurope.cloudapp.azure.com:8443/auth/realms/FinancialInfrastructures/broker/SPIDTESTNEW/endpoint" isDefault="true" index="0"/>
+<md:AttributeConsumingService index="0">
+<md:ServiceName xml:lang="en">My online services</md:ServiceName>
+<md:RequestedAttribute Name="name" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+<md:RequestedAttribute Name="familyName" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+<md:RequestedAttribute Name="fiscalNumber" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+<md:RequestedAttribute Name="placeOfBirth" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+<md:RequestedAttribute Name="dateOfBirth" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+<md:RequestedAttribute Name="mobilePhone" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+<md:RequestedAttribute Name="gender" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+<md:RequestedAttribute Name="email" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+<md:RequestedAttribute Name="spidCode" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+<md:RequestedAttribute Name="countyOfBirth" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+<md:RequestedAttribute Name="digitalAddress" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+<md:RequestedAttribute Name="address" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+<md:RequestedAttribute Name="ivaCode" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+<md:RequestedAttribute Name="companyName" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+<md:RequestedAttribute Name="registeredOffice" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+</md:AttributeConsumingService>
+</md:SPSSODescriptor>
+<md:Organization>
+<OrganizationName xml:lang="it">Critical-Chains</OrganizationName>
+<OrganizationDisplayName xml:lang="it">Critical-Chains</OrganizationDisplayName>
+<OrganizationURL xml:lang="it">http://spid.serviceprovider.it</OrganizationURL>
+</md:Organization>
+<md:ContactPerson contactType="other">
+<md:Extensions>
+<spid:FiscalCode>XYZABCAAMGGJ000W</spid:FiscalCode>
+<spid:Private/>
+</md:Extensions>
+<md:EmailAddress>tech-info@example.org</md:EmailAddress>
+<md:TelephoneNumber>+39 8472345634785</md:TelephoneNumber>
+</md:ContactPerson>
+</md:EntityDescriptor>
