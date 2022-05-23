@@ -11,6 +11,7 @@ import ProductListView from 'src/views/product/ProductListView';
 import RegisterView from 'src/views/auth/RegisterView';
 import SettingsView from 'src/views/settings/SettingsView';
 import AssetView from 'src/views/asset/AssetView';
+import RedemptionView from 'src/views/redemption/RedemptionView';
 
 const routes = [
   {
@@ -23,6 +24,7 @@ const routes = [
       { path: 'products', element: <ProductListView /> },
       { path: 'claim', element: <SettingsView /> },
       { path: 'asset', element: <AssetView /> },
+      { path: 'redemption', element: <RedemptionView /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
   },

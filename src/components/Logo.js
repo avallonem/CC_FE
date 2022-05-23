@@ -5,6 +5,7 @@ const Logo = (props) => {
     <img
       alt="Logo"
       src="/static/cclogo.png"
+      width="180"
       {...props}
     />
   );

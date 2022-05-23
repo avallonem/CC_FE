@@ -49,7 +49,7 @@ const TopBar = ({
         </RouterLink>
 		<Box flexGrow={1} />
 		<Typography variant="h3" color="textPrimary" className={classes.title} >
-                   FINANCIAL INFRASTRUCTURE MARKETS - Pilot Phase 1
+                   FINANCIAL INFRASTRUCTURE MARKETS - Pilot Phase 2
           </Typography>
         <Box flexGrow={1} />
         <Hidden mdDown>

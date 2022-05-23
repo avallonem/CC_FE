@@ -17,11 +17,12 @@ import {
   ListItemText,
   makeStyles
 } from '@material-ui/core';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+
 import FormDialog from './FormDialog';
+import AlertDialog from './AlertDialog';
 import configData from 'src/config.json';
 import keycloak from 'src/';
+
 
 const data = [
   {
@@ -122,6 +123,8 @@ const DepositAsset = ({ className, ...rest }) => {
                 <FormDialog
                 asset_provider={product.asset_provider}
                 asset_address_provider={product.asset_address_deposit_contract}
+                />
+                <AlertDialog
                 />
           </ListItem>
         ))}

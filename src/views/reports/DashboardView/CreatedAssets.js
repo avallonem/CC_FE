@@ -130,7 +130,7 @@ const CreatedAssets = ({ className, ...rest }) => {
       >
       </Box>
       <Button 
-            href='/app/asset'
+            href='/financial/asset'
             color="primary"
             variant="contained"
           >
