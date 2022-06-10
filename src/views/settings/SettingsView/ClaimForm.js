@@ -103,9 +103,9 @@ const ClaimForm = ({ className, ...rest }) => {
 
   const accounts = await window.ethereum.enable();
   const account = accounts[0];
-  const gas = await MyContract.methods.setContract('1',hashed)
-                      .estimateGas();
-  // const gas=0;
+  //const gas = await MyContract.methods.setContract('1',hashed)
+    //                  .estimateGas();
+  const gas=0;
   const result = await MyContract.methods.setContract('1',hashed).send({
     from: account,
     gas 

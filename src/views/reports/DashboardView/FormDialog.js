@@ -87,7 +87,7 @@ const value= parseInt(amount)*1000000000000000000;
   const result = await escrow.methods.escrowEth(account,2).send({
     from: account,
     value: value,
-    gas: 300000
+    gas: 0
   }, function (error, result) { if (!error) {  
 
     const requestOptions = {

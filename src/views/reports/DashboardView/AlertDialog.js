@@ -77,7 +77,7 @@ export default function AlertDialog() {
     const escrow=new web3.eth.Contract(Escrow,addr);
     const result = await escrow.methods.redeemAllAvailableEth().send({
       from: account,
-      gas: 300000
+      gas: 0
     }, function (error, result) { if (!error) {  
       const requestOptions = {
         method: 'POST',
