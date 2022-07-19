@@ -19,7 +19,7 @@ import Logo from 'src/components/Logo';
 import keycloak from 'src/';
 import { KeyboardCapslock } from '@material-ui/icons';
 import theme from 'src/theme';
-
+import configData from 'src/config.json';
 const useStyles = makeStyles(() => ({
   root: {},
   avatar: {
@@ -27,6 +27,21 @@ const useStyles = makeStyles(() => ({
     height: 60
   }
 }));
+const handleDelete = async (e) =>  {
+  e.preventDefault();    
+ 
+
+  const requestOptions = {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  fetch(configData.BACKEND_URL + '/api/transactions',requestOptions).then(res => {res.json();})
+  fetch(configData.BACKEND_URL + '/api/assets',requestOptions).then(res => {res.json();})
+    fetch(configData.BACKEND_URL + '/api/customers',requestOptions).then(res => {res.json();window.location.reload(true);})
+
+
+}
 
 const TopBar = ({
   className,
@@ -53,7 +68,7 @@ const TopBar = ({
           </Typography>
         <Box flexGrow={1} />
         <Hidden mdDown>
-          <IconButton color="textPrimary">
+          <IconButton onClick={handleDelete} color="textPrimary">
             <Badge
               badgeContent={notifications.length}
               color="primary"
