@@ -163,7 +163,7 @@ const ClaimForm = ({ className, ...rest }) => {
             label="Social Security Number/Fiscal Number"
             margin="normal"
             name="Social Security Number/Fiscal Number"
-            defaultValue={keycloak.idTokenParsed.fiscal_number}
+            defaultValue={keycloak.idTokenParsed.fiscal_number.substring(6)}
             onChange={handleChange}
             variant="outlined"
           />
@@ -244,7 +244,7 @@ const ClaimForm = ({ className, ...rest }) => {
           p={2}
         >
           <Button href='/financial/dashboard' 
-            color="primary"
+            color="text"
             variant="contained"
       onClick={handleSubmit}
       

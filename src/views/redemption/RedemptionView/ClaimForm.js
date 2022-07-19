@@ -22,13 +22,13 @@ import {
 } from '@material-ui/core';
 import Web3 from 'web3';
 import { pensionNotarization } from 'src/abis.js';
+import { object2 } from 'src/pensionNotarization_bytecode.json';
 import keycloak from 'src/';
 import AlertDialog from './AlertDialog';
 import configData from 'src/config.json';
 
 const web3 = new Web3(Web3.givenProvider);
-const contractAddr = configData.NOTARIZATION_CONTRACT;
-const MyContract = new web3.eth.Contract(pensionNotarization, contractAddr);
+
 var md5 = require('md5');
 
 const useStyles = makeStyles(({
@@ -100,12 +100,11 @@ const ClaimForm = ({ className, ...rest }) => {
   if (products.length<1){
    setHashed(md5(keycloak.idTokenParsed.family_name));
   
-
+   const MyContract = new web3.eth.Contract(pensionNotarization, sessionStorage.getItem('asset_address_deposit_contract'));
   const accounts = await window.ethereum.enable();
   const account = accounts[0];
-  const gas = await MyContract.methods.setContract('1',hashed)
-                      .estimateGas();
-  // const gas=0;
+ 
+  const gas=0;
   const result = await MyContract.methods.setContract('1',hashed).send({
     from: account,
     gas 
@@ -163,7 +162,7 @@ const ClaimForm = ({ className, ...rest }) => {
             label="Social Security Number/Fiscal Number"
             margin="normal"
             name="Social Security Number/Fiscal Number"
-            defaultValue={keycloak.idTokenParsed.fiscal_number}
+            defaultValue={keycloak.idTokenParsed.fiscal_number.substring(6)}
             onChange={handleChange}
             variant="outlined"
           />
@@ -244,10 +243,9 @@ const ClaimForm = ({ className, ...rest }) => {
           p={2}
         >
           <Button href='/financial/dashboard' 
-            color="primary"
+            color="text"
             variant="contained"
-      onClick={handleSubmit}
-      
+            onClick={handleSubmit}
           >
             SUBMIT
           </Button>

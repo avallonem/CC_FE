@@ -123,7 +123,7 @@ const ProfileDetails = ({ className, ...rest }) => {
                 label="Fiscal Number"
                 name="fiscal number"
                 onChange={handleChange}
-                value={keycloak.idTokenParsed.fiscal_number}
+                value={keycloak.idTokenParsed.fiscal_number.substring(6)}
                 variant="outlined"
               />
             </Grid>

@@ -141,10 +141,10 @@ const value= parseInt(amount)*1000000000000000000;
           <TextField autofocus margin="dense" id="deposit" label="Ether to Deposit" variant="outlined" fullWidth value={amount} onChange={evt => updateInputValue(evt)}/>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleClose} color="text">
             Cancel
           </Button>
-          <Button onClick={handleDeposit} color="primary">
+          <Button onClick={handleDeposit} color="text">
             Confirm
           </Button>
         </DialogActions>
